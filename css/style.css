@@ -11,8 +11,8 @@ nav {
   height: 7%;
   padding: 0;
   margin: 0;
-  background-color: black;
-  color: white;
+  background-color: #050005;
+  color: #CECDCE;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,22 +47,43 @@ nav {
 .library {
   flex-grow: 1;
   min-width: 75%;
-  background-color: red;
+  background-image: linear-gradient(#1A001A, #050005);
 }
 .library-content {
   margin: 0.5rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  background-color: white;
 }
 .card {
+  width: 125px;
+  height: 175px;
   margin: 0.5rem;
   padding: 1rem;
-  background-color: blue;
-  color: black;
-  border: 0.5px solid black;
-  border-radius: 5px;
+  background-color: #CECDCE;
+  color: #050005;
+  border: 1px solid #050005;
+  border-radius: 7px;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card:hover {
+  transform: scale(1.1, 1.1) perspective(1px);
+  backface-visibility: hidden;
+}
+.card-add {
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  background-color: #141A1E;
+  color: #CECDCE;
+  cursor: pointer;
+}
+.card-add:active {
+  transform: scale(1.2, 1.2);
+  box-shadow: 0px 0px 2px 1px #CECDCE;
 }
 @media only screen and (min-width: 768px) {
   .library {
@@ -72,10 +93,91 @@ nav {
     margin: 3rem;
     justify-content: flex-start;
   }
+  .card {
+    margin: 1rem;
+    width: 160px;
+    height: 210px;
+  }
 }
 
-/* Information */
-.information {
+/* Statistics */
+.statistics {
   flex-grow: 1;
-  background-color: blue;
+  background-color: #363436;
+  color: #CECDCE;
+  padding: 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.statistics-header {
+  font-size: 1.3rem;
+}
+
+.align-center {
+  align-self: center;
+}
+
+.btn-small {
+  background-color: #1A001A;
+  color: #CECDCE;
+  border: 2px solid black;
+  border-radius: 3px;
+  transition: all 0.1s ease;
+}
+.btn-small:hover {
+  cursor: pointer;
+  transform: scale(1.05, 1.05);
+}
+
+.btn {
+  background: rgba(0, 0, 0, 0);
+  color: #CECDCE;
+  font-size: 1.1rem;
+  border: 2px solid #9A1C17;
+  border-radius: 30px;
+  transition: all 0.1s ease;
+}
+.btn:hover {
+  cursor: pointer;
+  color: #CECDCE;
+  background-color: #9A1C17;
+}
+.btn:active {
+  background-color: #9A1C17;
+  color: #CECDCE;
+  transform: scale(1.1, 1.1);
+}
+.btn-large {
+  padding: 1rem 2rem;
+}
+.btn-card {
+  padding: 0.4rem 0.7rem;
+  border-radius: 4px;
+  color: #050005;
+}
+
+hr {
+  width: 100%;
+}
+
+.shrink {
+  flex-shrink: 1;
+}
+
+.card-header {
+  flex-shrink: 1;
+  margin: 3px 0;
+}
+.card-text {
+  flex-shrink: 1;
+  margin: 3px 0;
+}
+
+.disable-select {
+  user-select: none; /* supported by Chrome and Opera */
+ -webkit-user-select: none; /* Safari */
+ -khtml-user-select: none; /* Konqueror HTML */
+ -moz-user-select: none; /* Firefox */
+ -ms-user-select: none; /* Internet Explorer/Edge */
 }

@@ -9,6 +9,7 @@ function Book (title, author, pages, isRead = false) {
 
 Book.prototype.toggleRead = () => {
   this.isRead = !this.isRead;
+  refreshLibrary();
 }
 
 function addBookToLibrary (title, author, pages, isRead = false) {
@@ -21,11 +22,6 @@ function refreshLibrary () {
 
 }
 
-let lib = document.querySelector('#library');
-for (let i = 1; i <= 20; i++) {
-  lib.innerHTML += `<div class="card">
-                      <h3 class="card-header">Title</h3>
-                      <p class="card-subheader">Author</p>
-                      <p class="card-subheader">X pages long</p>
-                    </div>`;
+function makeStatistics () {
+
 }

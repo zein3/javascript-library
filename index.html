@@ -32,7 +32,7 @@
             <p class="card-text shrink">Read <span><button class="btn-small" data="index">read</button></span></p>
             <button class="btn btn-card">Delete</button>
           </div>
-          <div class="card card-add">
+          <div class="card card-add" onclick="openModal();">
             <h1 class="disable-select">+</h1>
           </div>
 
@@ -51,8 +51,16 @@
 
         <button class="btn btn-large align-center">Delete Local Storage</button>
       </div>
+
+      <div id="addBookModal" class="modal">
+        <div class="modal-content">
+          <span class="modal-close" onclick="closeModal();">&times;</span>
+          <p>A</p>
+        </div>
+      </div>
     </div>
 
+    <script src="js/modal.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>

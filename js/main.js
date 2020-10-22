@@ -1,5 +1,6 @@
 let myLibrary = [];
 let library = document.querySelector('#library');
+onClick(document.querySelector('#insertBookBtn'), addToLibraryButton);
 
 function Book (title, author, pages, isRead = false) {
   this.title = title;
@@ -17,6 +18,19 @@ function addBookToLibrary (title, author, pages, isRead = false) {
   let book = new Book (title, author, pages, isRead);
   myLibrary.push(book);
   refreshLibrary();
+}
+
+function addToLibraryButton () {
+  let inputs = [];
+  document.querySelectorAll('.input-book').forEach ((inp) => {
+    inputs.push(inp.value);
+  })
+  if (inputs[0] === '' || inputs[1] === '' || inputs[2] === '') {
+    return;
+  }
+
+  addBookToLibrary(inputs[0], inputs[1], inputs[2], (inputs[3] == 'true'));
+  closeModal();
 }
 
 function removeBookFromLibrary (index) {
@@ -71,7 +85,7 @@ function makeStatistics () {
   let totalPagesRead = 0;
 
   myLibrary.forEach ((book) => {
-    let pages = (book.pages > 0) ? book.pages : 0;
+    let pages = (book.pages > 0) ? parseInt(book.pages) : 0;
 
     if (book.isRead) {
       totalBooksRead++;
@@ -120,7 +134,4 @@ function emptyLibrary () {
   }
 }
 
-addBookToLibrary('a', 'a', 245, false);
-addBookToLibrary('b', 'b', 500, false);
-addBookToLibrary('c', 'c', -214, false);
 refreshLibrary();

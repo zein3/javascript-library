@@ -19,10 +19,16 @@ function addBookToLibrary (title, author, pages, isRead = false) {
   refreshLibrary();
 }
 
+function removeBookFromLibrary (index) {
+  myLibrary.splice(index, 1);
+  refreshLibrary();
+}
+
 function refreshLibrary () {
   emptyLibrary();
 
-  myLibrary.forEach ((book) => {
+  // Add each book to library
+  myLibrary.forEach ((book, i) => {
     let title = book.title;
     let author = book.author;
     let pages = (book.pages > 0) ? `${book.pages} pages long` : 'Unknown';
@@ -31,15 +37,21 @@ function refreshLibrary () {
     let parent = document.createElement('div');
     parent.classList.add('card');
 
-    let isReadText = makeCardText(isRead);
-    let toggleReadBtn = makeCardText((book.isRead) ? 'Unread' : 'Read', 'button', 'btn-small');
-    toggleReadBtn.addEventListener('click', book.toggleRead);
+    let isReadText = makeElement(isRead);
+    let toggleReadBtn = makeElement((book.isRead) ? 'Unread' : 'Read', 'button', 'btn-small');
+    onClick(toggleReadBtn, book.toggleRead);
     isReadText.appendChild(toggleReadBtn);
 
-    let cardText = [makeCardText(title, 'h3', 'card-header'),
-                    makeCardText(author),
-                    makeCardText(pages),
-                    isReadText];
+    let deleteBtn = makeElement('Delete', 'button', 'btn');
+    deleteBtn.classList.add('btn-card');
+    onClick(deleteBtn, () => removeBookFromLibrary(i));
+
+    let cardText = [makeElement(title, 'h3', 'card-header'),
+                    makeElement(author),
+                    makeElement(pages),
+                    isReadText,
+                    deleteBtn];
+
     cardText.forEach ((c) => {
       parent.appendChild(c);
     })
@@ -53,14 +65,39 @@ function refreshLibrary () {
 }
 
 function makeStatistics () {
+  let totalBooks = 0;
+  let totalBooksRead = 0;
+  let totalPages = 0;
+  let totalPagesRead = 0;
 
+  myLibrary.forEach ((book) => {
+    let pages = (book.pages > 0) ? book.pages : 0;
+
+    if (book.isRead) {
+      totalBooksRead++;
+      totalPagesRead += pages;
+    }
+
+    totalBooks++;
+    totalPages += pages;
+  })
+
+  document.querySelector('#totalBooks').textContent = totalBooks;
+  document.querySelector('#totalBooksRead').textContent = totalBooksRead;
+  document.querySelector('#totalPages').textContent = totalPages;
+  document.querySelector('#totalPagesRead').textContent = totalPagesRead;
 }
 
-function makeCardText (text, elem = 'p', class_ = 'card-text') {
+function makeElement (text, elem = 'p', class_ = 'card-text') {
   let cardText = document.createElement(elem);
   cardText.classList.add(class_);
   cardText.textContent = text;
   return cardText
+}
+
+function onClick (element, func) {
+  element.addEventListener('click', func);
+  element.addEventListener('touchStart', func);
 }
 
 function loadPlusCard () {
@@ -71,7 +108,7 @@ function loadPlusCard () {
   let card = document.createElement('div');
   card.classList.add('card');
   card.classList.add('card-add');
-  card.addEventListener('click', openModal);
+  onClick(card, openModal);
   card.appendChild(plus);
   library.appendChild(card);
 }
@@ -83,4 +120,7 @@ function emptyLibrary () {
   }
 }
 
+addBookToLibrary('a', 'a', 245, false);
+addBookToLibrary('b', 'b', 500, false);
+addBookToLibrary('c', 'c', -214, false);
 refreshLibrary();

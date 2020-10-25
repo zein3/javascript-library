@@ -4,6 +4,7 @@ body {
   padding: 0;
   margin: 0;
   overflow-x: hidden;
+  font-family: 'Roboto', sans-serif;
 }
 
 nav {
@@ -16,7 +17,7 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Gentium Book Basic', serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 1.4rem;
   letter-spacing: 0.1rem;
 }
@@ -151,6 +152,7 @@ nav {
 .btn-small {
   background-color: #1A001A;
   color: #CECDCE;
+  font-family: 'Roboto', sans-serif;
   border: 2px solid black;
   border-radius: 3px;
   transition: all 0.1s ease;
@@ -164,6 +166,7 @@ nav {
 .btn {
   background: rgba(0, 0, 0, 0);
   color: #CECDCE;
+  font-family: 'Roboto', sans-serif;
   font-size: 1.1rem;
   border: 2px solid #9A1C17;
   border-radius: 30px;

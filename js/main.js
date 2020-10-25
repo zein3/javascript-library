@@ -9,13 +9,15 @@ onClick(document.querySelector('#deleteStorageBtn'), () => {
   }
 })
 
-function Book (title, author, pages, isRead = false) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
+class Book {
+  constructor (title, author, pages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
+  }
 
-  this.toggleRead = () => {
+  toggleRead = () => {
     this.isRead = !this.isRead;
     saveLibrary();
     refreshLibrary();

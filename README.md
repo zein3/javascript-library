@@ -6,3 +6,5 @@ Pengguna dapat menambahkan buku, menandai buku yang sudah dibaca, dan melihat st
 <a href="https://zein3.github.io/javascript-library/">Aplikasi dapat diakses secara online disini</a>  
 <a href="https://github.com/zein3/javascript-library">Source code dapat dilihat disini</a>
 
+## Screenshot
+<img src="https://raw.githubusercontent.com/zein3/javascript-library/main/screenshot.png" alt="Screenshot aplikasi">

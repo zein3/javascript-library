@@ -9,21 +9,6 @@ onClick(document.querySelector('#deleteStorageBtn'), () => {
   }
 })
 
-class Book {
-  constructor (title, author, pages, isRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
-  }
-
-  toggleRead = () => {
-    this.isRead = !this.isRead;
-    saveLibrary();
-    refreshLibrary();
-  }
-}
-
 function addBookToLibrary (title, author, pages, isRead = false) {
   let book = new Book (title, author, pages, isRead);
   myLibrary.push(book);
@@ -114,31 +99,6 @@ function makeStatistics () {
   document.querySelector('#totalPagesRead').textContent = totalPagesRead;
 }
 
-function makeElement (text, elem = 'p', class_ = 'card-text') {
-  let cardText = document.createElement(elem);
-  cardText.classList.add(class_);
-  cardText.textContent = text;
-  return cardText
-}
-
-function onClick (element, func) {
-  element.addEventListener('click', func);
-  element.addEventListener('touchStart', func);
-}
-
-function loadPlusCard () {
-  let plus = document.createElement('h1');
-  plus.textContent = '+';
-  plus.classList.add('disable-select');
-
-  let card = document.createElement('div');
-  card.classList.add('card');
-  card.classList.add('card-add');
-  onClick(card, openModal);
-  card.appendChild(plus);
-  library.appendChild(card);
-}
-
 function emptyLibrary () {
   if (library.firstChild !== null) {
     library.removeChild(library.firstChild);
@@ -146,54 +106,6 @@ function emptyLibrary () {
   }
 }
 
-function storageAvailable (type) {
-  var storage;
-  try {
-    storage = window[type];
-    var x = '__storage_test__';
-    storage.setItem(x, x);
-    storage.removeItem(x);
-    return true;
-  }
-  catch(e) {
-    return e instanceof DOMException && (
-      // everything except Firefox
-      e.code === 22 ||
-      // Firefox
-      e.code === 1014 ||
-      // test name field too, because code might not be present
-      // everything except Firefox
-      e.name === 'QuotaExceededError' ||
-      // Firefox
-      e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
-      // acknowledge QuotaExceededError only if there's something already stored
-      (storage && storage.length !== 0);
-  }
-}
-
-function saveLibrary () {
-  if (storageAvailable('localStorage')) {
-    let storage = localStorage;
-    storage.clear();
-    myLibrary.forEach ((book, i) => {
-      let bookStringified = JSON.stringify(book)
-      storage.setItem(i, bookStringified);
-    })
-  }
-}
-
-function loadLibrary () {
-  if (storageAvailable('localStorage')) {
-    let storage = localStorage;
-    if (storage.length > 0) {
-      myLibrary = [];
-      for (let i = 0; i < storage.length; i++) {
-        let newBook = JSON.parse(storage.getItem(i));
-        addBookToLibrary(newBook.title, newBook.author, newBook.pages, newBook.isRead);
-      }
-    }
-  }
-}
 
 loadLibrary();
 refreshLibrary();
